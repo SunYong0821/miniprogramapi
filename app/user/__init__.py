@@ -8,7 +8,7 @@ user = Blueprint('user', __name__)
 
 @user.route('/')
 def index():
-    return "hello world~"
+    return "hello world~ 孙博衍~"
 
 @user.route("/login", methods=['POST'])
 def login():
