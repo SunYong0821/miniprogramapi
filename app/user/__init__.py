@@ -6,6 +6,9 @@ import requests
 
 user = Blueprint('user', __name__)
 
+@user.route('/')
+def index():
+    return "hello world~"
 
 @user.route("/login", methods=['POST'])
 def login():
