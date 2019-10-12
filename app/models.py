@@ -13,6 +13,20 @@ from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, SignatureExpired, BadSignature
 
 
+@auth.verify_token
+def verify_token(token):
+    s = Serializer(current_app.config['SECRET_KEY'])
+    try:
+        s.loads(token)
+    except SignatureExpired:
+        print('token过期')
+        return False
+    except BadSignature:
+        print('token不正确')
+        return False
+    return True
+
+
 class User(db.Model):
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
@@ -41,20 +55,6 @@ class User(db.Model):
         #s = Serializer(current_app.config['SECRET_KEY'], expires_in=10)
         s = Serializer(current_app.config['SECRET_KEY'], expires_in=3600)
         return str(s.dumps({'openid': self.openid}), encoding='utf-8')
-
-
-@auth.verify_token
-def verify_token(token):
-    s = Serializer(current_app.config['SECRET_KEY'])
-    try:
-        s.loads(token)
-    except SignatureExpired:
-        print('token过期')
-        return False
-    except BadSignature:
-        print('token不正确')
-        return False
-    return True
 
 
 if __name__ == '__main__':
