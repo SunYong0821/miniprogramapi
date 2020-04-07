@@ -43,7 +43,7 @@ def login():
     return jsonify(resp)
 
 
-@user.route("/check_token", methods=['POST'])
+@user.route("/check_token")
 @auth.login_required
 def token():
     return jsonify({'msg': 'success'})

@@ -22,10 +22,8 @@ def verify_token(token):
     try:
         s.loads(token)
     except SignatureExpired:
-        print('token过期')
         return False
     except BadSignature:
-        print('token不正确')
         return False
     return True
 
@@ -55,8 +53,8 @@ class User(db.Model):
 
     # 获取token
     def generate_auth_token(self):
-        s = Serializer(current_app.config['SECRET_KEY'], expires_in=10)
-        #s = Serializer(current_app.config['SECRET_KEY'], expires_in=3600)
+        #s = Serializer(current_app.config['SECRET_KEY'], expires_in=10)
+        s = Serializer(current_app.config['SECRET_KEY'], expires_in=3600)
         return str(s.dumps({'openid': self.openid}), encoding='utf-8')
 
 
