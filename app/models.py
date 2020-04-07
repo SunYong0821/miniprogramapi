@@ -8,10 +8,13 @@
 
 
 from app import db, auth
-from flask import current_app
+from flask import current_app, jsonify
 from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, SignatureExpired, BadSignature
 
+@auth.error_handler
+def error_handler():
+    return jsonify({ 'code':401, 'message':'401 Unauthorized Access' })
 
 @auth.verify_token
 def verify_token(token):
@@ -52,8 +55,8 @@ class User(db.Model):
 
     # 获取token
     def generate_auth_token(self):
-        #s = Serializer(current_app.config['SECRET_KEY'], expires_in=10)
-        s = Serializer(current_app.config['SECRET_KEY'], expires_in=3600)
+        s = Serializer(current_app.config['SECRET_KEY'], expires_in=10)
+        #s = Serializer(current_app.config['SECRET_KEY'], expires_in=3600)
         return str(s.dumps({'openid': self.openid}), encoding='utf-8')
 
 
