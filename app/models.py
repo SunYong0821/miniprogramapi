@@ -14,7 +14,7 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, Signatur
 
 @auth.error_handler
 def error_handler():
-    return jsonify({ 'code':401, 'message':'401 Unauthorized Access' })
+    return jsonify({'code':401, 'message':'401 Unauthorized Access'})
 
 @auth.verify_token
 def verify_token(token):
