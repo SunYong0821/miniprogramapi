@@ -46,4 +46,4 @@ def login():
 @user.route("/check_token")
 @auth.login_required
 def token():
-    return jsonify({'code':401, 'message': 'success'})
+    return jsonify({'code': 200, 'message': 'check token success'})
