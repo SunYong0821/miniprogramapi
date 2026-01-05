@@ -1,4 +1,4 @@
-SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:1123581321@127.0.0.1:3306/mp?charset=utf8mb4'
+SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:111@127.0.0.1:3306/mp?charset=utf8mb4'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 SECRET_KEY = "64ebe6f0ee0411e8a8b56c92bf4f31c4"
